@@ -5,7 +5,7 @@ octaves = 1
 period = 10.0
 
 [resource]
-width = 200
-height = 200
+width = 100
+height = 100
 seamless = true
 noise = SubResource( 1 )

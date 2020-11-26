@@ -9,7 +9,7 @@ var img
 var wall
 var flor
 var noise
-var size = 200
+var size = 100
 
 
 #var RS = ResourceSaver.new()
@@ -26,6 +26,8 @@ func _ready():
 	noise.lock()
 	flor = get_node("floor")
 	wall = get_node("walls")
+	flor.clear()
+	wall.clear()
 	print('gen_started')
 	for x in range(size):
 		for y in range(size):
@@ -49,7 +51,8 @@ func _ready():
 	ResourceSaver.save("res://my_scene.tscn", packed_scene)
 	pass # Replace with function body.
 
-
+#func clear():
+#	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

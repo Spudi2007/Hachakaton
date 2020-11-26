@@ -1,4 +1,4 @@
-extends Node2D
+extends KinematicBody2D
 
 var is_active = false
 var node_object
@@ -10,6 +10,9 @@ var move_radius = 5
 var active_range = 1500
 var cooldown = 1
 var time_to_shoot
+var path = [Vector2(134, 221), Vector2(13434, 221)]
+
+
 func _ready():
 	pass
 
@@ -39,6 +42,23 @@ func _process(delta):
 			else:
 				random_move()
 	check_active(aim.position)
+	move(delta)
+var path_buff = Vector2(0,0)
+func move(delta):
+	if aim:
+		if (path[-1] - aim.global_position).length() >= 100 or true:
+			path = get_tree().get_root().get_node('Node2D/Navigation2D').get_simple_path(self.global_position, aim.global_position, true)
+			path_buff = path[-1]
+		if path.size() > 1:
+#			path.remove(0)
+#			print(self.move_and_collide((path[1] - self.global_position).normalized() * delta * 200))
+			if (self.global_position - path[0]).length() < 0.1:
+				path.remove(0)
+			move_and_slide((path[0] - self.global_position).normalized() * 200)
+#			else:
+#				move_and_slide((path[1] - self.global_position).normalized() * 200)
+#self.position += (path[1] - self.global_position).normalized() * 1
+	pass
 
 
 func random_turn():

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://mobs/models/laser.gd" type="Script" id=1]
+[ext_resource path="res://mobs/models/laser.png" type="Texture" id=2]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = 3.14159
+scale = Vector2( 0.797, 1.044 )
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( -10, -0.538 )

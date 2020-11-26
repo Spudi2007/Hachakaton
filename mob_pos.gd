@@ -11,9 +11,14 @@ func _ready():
 		child.get_child(0).aim = get_parent().get_node("walls/RigidBody2D")
 		if child.name.substr(0,1) == "r":
 			unit_scene = load("res://mobs/navigation_drone.tscn").instance()
-			child.add_child(unit_scene)
+			child.get_child(0).add_child(unit_scene)
 			print("adding child")
-
+		
+		elif child.name.substr(0,1) == "t":
+			unit_scene = load("res://mobs/self-propelled_gun.tscn").instance()
+			child.get_child(0).add_child(unit_scene)
+#			print(child.get_child(0))
+			print("adding child")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 

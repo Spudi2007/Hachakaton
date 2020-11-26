@@ -21,15 +21,19 @@ func _input(event):
 	if event is InputEventMouseButton:
 		weapon_vec = (event.position - Vector2(500,300))
 	if event.is_action_pressed('left_button'):
-		weapons[0].start_firing()
+#		weapons[0].start_firing()
+		print(get_parent().get_parent().get_simple_path(Vector2(0,0), Vector2(100,100)))
+		pass
 	if event.is_action_pressed('right_button'):
-		weapons[1].start_firing()
+#		weapons[1].start_firing()
+		pass
 		
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	move = Vector2(0,0)
-	get_node("Sprite").texture = viewport.get_texture()
+	print(self.position)
+#	get_node("Sprite").texture = viewport.get_texture()
 #	self.move_and_slide(vec.normalized() * 500)
 	if Input.is_action_pressed("move_up"):
 		move.y -= 200
