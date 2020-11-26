@@ -21,9 +21,7 @@ func check_aggro(aim_pos):
 		return false
 		
 func check_active(aim_pos):
-	print((get_parent().position - aim_pos).length())
 	if active_range >= (get_parent().position - aim_pos).length():
-		print("is_active")
 		return true
 	else:
 #		print("is_NOT_active")

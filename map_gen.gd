@@ -15,6 +15,7 @@ var size = 200
 #var RS = ResourceSaver.new()
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	return
 	img = get_node("Sprite").texture.get_data()
 	noise = get_node("Sprite2").texture.noise.get_image(200,200)
 #	print(noise.)
