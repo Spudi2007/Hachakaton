@@ -16,5 +16,5 @@ func _input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	self.move_and_slide(vec.normalized() * 100)
+	self.move_and_slide(vec.normalized() * 500)
 	pass
