@@ -76,16 +76,16 @@ var path_buff = Vector2(0,0)
 
 func move(delta, aim):
 	if aim:
-		
-		if (path[-1] - aim).length() >= 100 or true:
-			path = get_tree().get_root().get_node('Node2D/Navigation2D').get_simple_path(self.global_position, aim, true)
-			path_buff = path[-1]
-		if path.size() > 1:
-#			path.remove(0)
-#			print(self.move_and_collide((path[1] - self.global_position).normalized() * delta * 200))
-			if (self.global_position - path[0]).length() < 0.1:
-				path.remove(0)
-			move_and_slide((path[0] - self.global_position).normalized() * 200)
+		if path:
+			if (path[-1] - aim).length() >= 100 or true:
+				path = get_tree().get_root().get_node('Node2D/Navigation2D').get_simple_path(self.global_position, aim, true)
+				path_buff = path[-1]
+			if path.size() > 1:
+	#			path.remove(0)
+	#			print(self.move_and_collide((path[1] - self.global_position).normalized() * delta * 200))
+				if (self.global_position - path[0]).length() < 0.1:
+					path.remove(0)
+				move_and_slide((path[0] - self.global_position).normalized() * 200)
 #			else:
 #				move_and_slide((path[1] - self.global_position).normalized() * 200)
 #self.position += (path[1] - self.global_position).normalized() * 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://ManuallySavedImage.png" type="Texture" id=1]
 [ext_resource path="res://floor.png" type="Texture" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://noisetex.tres" type="Texture" id=12]
 [ext_resource path="res://floor2.png" type="Texture" id=13]
 [ext_resource path="res://map.png" type="Texture" id=14]
+[ext_resource path="res://mobs/models/main_char_head.obj" type="ArrayMesh" id=15]
+[ext_resource path="res://mobs/models/main_char_legs.obj" type="ArrayMesh" id=16]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 0, 32, 64, 64, 128, 32, 64, 0 )
@@ -116,7 +118,10 @@ points = PoolVector2Array( 64, 128, 0, 96, 64, 64, 128, 96 )
 [sub_resource type="CircleShape2D" id=9]
 radius = 36.7311
 
-[sub_resource type="CapsuleMesh" id=10]
+[sub_resource type="SpatialMaterial" id=10]
+albedo_color = Color( 0.309804, 0.364706, 0.478431, 1 )
+metallic = 0.55
+roughness = 0.6
 
 [sub_resource type="PlaneMesh" id=11]
 
@@ -205,21 +210,19 @@ script = ExtResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="walls/RigidBody2D"]
 position = Vector2( 0, -34.9233 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls/RigidBody2D"]
 shape = SubResource( 9 )
 
 [node name="Light2D" type="Light2D" parent="walls/RigidBody2D"]
-visible = false
 position = Vector2( 0.943848, -53.8008 )
 texture = ExtResource( 8 )
 texture_scale = 2.58
 mode = 2
 shadow_enabled = true
 shadow_color = Color( 0, 0, 0, 1 )
-
-[node name="weapons" type="Node2D" parent="walls/RigidBody2D"]
 
 [node name="Viewport" type="Viewport" parent="walls/RigidBody2D"]
 size = Vector2( 64, 64 )
@@ -229,13 +232,24 @@ render_target_v_flip = true
 [node name="Spatial" type="Spatial" parent="walls/RigidBody2D/Viewport"]
 
 [node name="MeshInstance" type="MeshInstance" parent="walls/RigidBody2D/Viewport/Spatial"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-mesh = SubResource( 10 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.311105, -0.0115265 )
+mesh = ExtResource( 15 )
+material/0 = SubResource( 10 )
+material/1 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="walls/RigidBody2D/Viewport/Spatial"]
+transform = Transform( -0.650589, 0, -0.75943, 0, 1, 0, 0.75943, 0, -0.650589, 0, -0.311105, -0.0115265 )
+mesh = ExtResource( 16 )
 material/0 = null
 
 [node name="Camera" type="Camera" parent="walls/RigidBody2D/Viewport/Spatial"]
-transform = Transform( 0.707107, -0.353553, 0.612373, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 3, 2.76844, 3 )
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0.38846, 3.83219, 3.0209 )
+projection = 1
 current = true
+size = 6.41097
+
+[node name="DirectionalLight" type="DirectionalLight" parent="walls/RigidBody2D/Viewport/Spatial"]
+transform = Transform( 0.655202, -0.386269, 0.649235, 0, 0.859398, 0.511308, -0.755453, -0.33501, 0.563079, 3.26221, 3.99352, -8.08026 )
 
 [node name="Camera2D" type="Camera2D" parent="walls/RigidBody2D"]
 current = true
@@ -246,6 +260,13 @@ drag_margin_bottom = 0.0
 
 [node name="Timer" type="Timer" parent="walls/RigidBody2D"]
 wait_time = 0.2
+autostart = true
+
+[node name="legs" type="Node2D" parent="walls/RigidBody2D"]
+position = Vector2( 0, -34.9233 )
+
+[node name="weapons" type="Node2D" parent="walls/RigidBody2D"]
+position = Vector2( 0, -34.9233 )
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
