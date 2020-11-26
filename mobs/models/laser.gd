@@ -19,3 +19,7 @@ func _ready():
 
 func _draw():
 	draw_line(self.global_position, to, 10)
+
+
+func _on_Timer_timeout():
+	self.queue_free()

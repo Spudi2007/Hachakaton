@@ -12,3 +12,8 @@ scale = Vector2( 0.797, 1.044 )
 texture = ExtResource( 2 )
 centered = false
 offset = Vector2( -10, -0.538 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

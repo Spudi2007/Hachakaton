@@ -11,6 +11,7 @@ func _ready():
 
 func take_damage(damage):
 	hp -= damage
+	
 
 func find_target():
 	var space_state = get_world_2d().direct_space_state

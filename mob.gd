@@ -2,52 +2,83 @@ extends KinematicBody2D
 
 var is_active = false
 var node_object
-var busy = false
-var aggro_range = 1000
+var busy
+var aggro_range = 100
 var aim
 var is_aggressive = false
-var move_radius = 5
-var active_range = 1500
+var move_radius = 500
+var active_range = 1000
 var cooldown = 1
 var time_to_shoot
 var path = [Vector2(134, 221), Vector2(13434, 221)]
-
+var where_random_move
+var nav 
 
 func _ready():
+	randomize()
+	nav = get_tree().get_root().get_node('Node2D/Navigation2D')
 	pass
+
+func take_damage(damage):
+	get_child(2).take_damage(damage)
+	if get_child(2).hp <= 0:
+		self.queue_free()
 
 func attack(aim):
 	pass
 
 func check_aggro(aim_pos):
-	if aggro_range >= (position - aim_pos).length():
-		return true
-	else:
-		return false
+	if aggro_range >= (self.global_position - aim_pos).length():
+		is_aggressive = true
+	return is_aggressive
+	
 		
 func check_active(aim_pos):
-	if active_range >= (get_parent().position - aim_pos).length():
+	if active_range >= (self.global_position - aim_pos).length():
+		is_active = true
 		return true
 	else:
-#		print("is_NOT_active")
+		is_active = false
 		return false
+
 func _process(delta):
-	if is_active:
+	if check_active(aim.position):
+		
 		if check_aggro(aim.position):
-			is_aggressive = true
-		if !busy:
-			var roll = randf()
-			if roll > 0.5:
-				random_turn()
-			else:
-				random_move()
-	check_active(aim.position)
-	move(delta)
+			aggres(delta)
+			busy = "aggro"
+			print("IM ANGRY")
+		else:
+			if !busy:
+				var roll = randf()
+				if roll > 0.5:
+					get_node("Timer").wait_time = (randf() * 5)
+					busy = "random_wait"
+					get_node("Timer").start()
+					print("I'm wait")
+				else:
+					var where_random_move_loacal = Vector2((randf() * move_radius * 2 - move_radius), (randf() * move_radius * 2 - move_radius)) + global_position
+					where_random_move = nav.get_closest_point(where_random_move_loacal)
+					busy = "random_move"
+					print("I'm moving")
+			if busy == "random_move":
+				move(delta, where_random_move)
+			elif busy == "random_wait":
+				return
+	
+	else:
+		busy = null
+		is_active = false
+		is_aggressive = false
+		
+	
 var path_buff = Vector2(0,0)
-func move(delta):
+
+func move(delta, aim):
 	if aim:
-		if (path[-1] - aim.global_position).length() >= 100 or true:
-			path = get_tree().get_root().get_node('Node2D/Navigation2D').get_simple_path(self.global_position, aim.global_position, true)
+		
+		if (path[-1] - aim).length() >= 100 or true:
+			path = get_tree().get_root().get_node('Node2D/Navigation2D').get_simple_path(self.global_position, aim, true)
 			path_buff = path[-1]
 		if path.size() > 1:
 #			path.remove(0)
@@ -58,25 +89,31 @@ func move(delta):
 #			else:
 #				move_and_slide((path[1] - self.global_position).normalized() * 200)
 #self.position += (path[1] - self.global_position).normalized() * 1
-	pass
+		if aim.distance_to(global_position) < 1:
+			busy = null
+			
+		
+
 
 
 func random_turn():
 	var angle = int (round(randf() * 360))
-	node_object.Rotatio
+	
 
 func fire():
 	if time_to_shoot != 0:
 		return
 	
 	
+
+func aggres(delta):
+	move(delta, aim.global_position)
+
+func random_move(where):
+	move_and_slide(where)
 	
 
-func aggres():
-	pass
 
-func random_move():
-	var where = Vector2((randf() * move_radius * 2 - move_radius), (randf() * move_radius * 2 - move_radius)) + position
-	
-	random_turn()
-	
+func random_wait():
+	busy = null
+	get_node("Timer").stop()

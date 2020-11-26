@@ -8,7 +8,7 @@ extends TileMap
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print(get_parent().get_simple_path(Vector2(2913.83,1546.54), Vector2(2118,1751)))
+#	print(get_parent().get_simple_path(Vector2(2913.83,1546.54), Vector2(2118,1751)))
 	pass # Replace with function body.
 
 
