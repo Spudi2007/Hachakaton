@@ -16,9 +16,10 @@ func take_damage(damage):
 func find_target():
 	var space_state = get_world_2d().direct_space_state
 	# use global coordinates, not local to node
-	var result = space_state.intersect_ray(self.position, get_parent().aim.position)
+	var result = space_state.intersect_ray(self.global_position, get_parent().aim.global_position)
 	if result:
-		result.collider.add_to_group("lighted_up")
+		if result.collider.name != 'walls':
+			result.collider.add_to_group("lighted_up")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 #	return

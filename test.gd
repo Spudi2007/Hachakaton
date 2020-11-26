@@ -36,6 +36,9 @@ func _input(event):
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	for node in get_tree().get_nodes_in_group('lighted_up'):
+		node.remove_from_group("lighted_up")
+	print(get_tree().get_nodes_in_group('lighted_up'))
 #	move = Vector2(0,0)
 	magic_vector = Vector2(0,0)
 	get_node("weapons").look_at(weapon_vec + get_child(0).global_position)

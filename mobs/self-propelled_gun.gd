@@ -6,6 +6,7 @@ var weapon
 var bulet_scene = "res://mobs/models/laser.tscn"
 
 func _ready():
+	print(name)
 #	bulet_scene = load("res://mobs/models/projecttile.tscn").instance()
 #	self.add_child(bulet_scene)
 	pass
@@ -33,8 +34,14 @@ func _process(delta):
 func fire():
 	var b = load(bulet_scene).instance()
 	var space_state = get_world_2d().direct_space_state
-
-	var result = space_state.intersect_ray(self.global_position, get_parent().aim.get_child(0).global_position)
+	var lighted_targets = get_tree().get_nodes_in_group('lighted_up')
+	var target
+	if lighted_targets:
+		target = find_closest(lighted_targets).global_position
+	else:
+		return
+		target = get_parent().aim.get_child(0).global_position
+	var result = space_state.intersect_ray(self.global_position, target)
 	if result:
 		if result['collider'].name == 'RigidBody2D':
 			b.to = result['collider'].get_child(0).global_position
@@ -56,4 +63,11 @@ func fire():
 	pass
 
 
-
+func find_closest(arr):
+	var m = 99999
+	var closest
+	for elem in arr:
+		if elem.global_position.distance_to(self.global_position) < m:
+			closest = elem
+			m = elem.global_position.distance_to(self.global_position)
+	return closest

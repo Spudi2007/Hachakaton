@@ -3,8 +3,9 @@ extends KinematicBody2D
 var is_active = false
 var node_object
 var busy
-var aggro_range = 100
+var aggro_range = 600
 var aim
+var fire_distance =400
 var is_aggressive = false
 var move_radius = 500
 var active_range = 1000
@@ -107,6 +108,12 @@ func fire():
 	
 
 func aggres(delta):
+	if global_position.distance_to(aim.global_position) <= fire_distance:
+		if get_child(2).name == "self-propelled_gun" and get_child(2).get_node("Timer").is_stopped():
+			get_child(2).get_node("Timer").start()
+	else:
+		if get_child(2).name == "self-propelled_gun":
+			get_child(2).get_node("Timer").stop()
 	move(delta, aim.global_position)
 
 func random_move(where):
