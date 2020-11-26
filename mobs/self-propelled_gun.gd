@@ -1,18 +1,20 @@
 extends Node2D
 
-
 var hp = 100
 var damage = 15
 var weapon
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
-	pass
+	pass 
+
 
 func take_damage(damage):
 	hp -= damage
-
 	
+func change_aim(aim):
+	get_parent().aim = aim
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
