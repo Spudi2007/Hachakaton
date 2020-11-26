@@ -1,9 +1,7 @@
 extends Node2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+
 var charactcer_node = get_parent()
 var unit_scene
 

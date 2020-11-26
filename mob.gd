@@ -8,6 +8,8 @@ var aim
 var is_aggressive = false
 var move_radius = 5
 var active_range = 1500
+var cooldown = 1
+var time_to_shoot
 func _ready():
 	pass
 
@@ -43,6 +45,14 @@ func random_turn():
 	var angle = int (round(randf() * 360))
 	node_object.Rotatio
 
+func fire():
+	if time_to_shoot != 0:
+		return
+	
+	
+
+func aggres():
+	pass
 
 func random_move():
 	var where = Vector2((randf() * move_radius * 2 - move_radius), (randf() * move_radius * 2 - move_radius)) + position
