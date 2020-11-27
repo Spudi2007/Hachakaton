@@ -17,6 +17,7 @@ var nav
 var magic_move = Vector2(0,0)
 var move_buff = Vector2(0,0)
 var approach_radius = 200
+var speed = 200
 
 var death_timer = -1
 
@@ -114,7 +115,7 @@ func move(delta, aim):
 				if (self.global_position - path[0]).length() < 0.1:
 					path.remove(0)
 #				move_and_slide((path[0] - self.global_position).normalized() * 200)
-				magic_move = (path[0] - self.global_position).normalized() * 200
+				magic_move = (path[0] - self.global_position).normalized() * speed
 				move_buff = lerp(move_buff, magic_move, 0.03)
 				get_child(2).move_to = move_buff
 				move_and_slide(move_buff)
