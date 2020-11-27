@@ -18,6 +18,7 @@ var magic_move = Vector2(0,0)
 var move_buff = Vector2(0,0)
 var approach_radius = 200
 var speed = 200
+var hp
 
 var death_timer = -1
 
@@ -143,6 +144,8 @@ func aggres(delta):
 	if global_position.distance_to(aim.global_position) <= fire_distance:
 		if get_child(2).name == "self-propelled_gun" and get_child(2).get_node("Timer").is_stopped():
 			get_child(2).get_node("Timer").start()
+		if get_child(2).name == "godzilla":
+			get_child(2).check_attack()
 	else:
 		if get_child(2).name == "self-propelled_gun":
 			get_child(2).get_node("Timer").stop()

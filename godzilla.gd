@@ -11,13 +11,15 @@ var state = "free"
 var exploions
 var radius_of_exlosions = 400
 var bullet_path = "res://bullet.tscn"
-var aim = get_tree().get_root().get_node("Node2D/walls/RigidBody2D")
+var aim
+var move_to = Vector2(0,0)
 func _ready():
 	get_parent().hp = hp
 	get_parent().aggro_range = aggro_range
 	get_parent().approach_radius = approach_radius
 	get_parent().is_active = is_active
 	get_parent().fire_distance = fire_distance
+	aim = get_tree().get_root().get_node("Node2D/walls/RigidBody2D")
 
 func take_damage(damage):
 	hp -= damage
@@ -32,8 +34,9 @@ func check_attack():
 	if state == "free":
 		var roll = randf()
 		if roll < 0.2:
-			get_node("chill_time")
-			state == "chill"
+			get_node("chill_time").start()
+			state = "chill"
+			
 		elif roll >= 0.2 and roll < 0.4:
 			just_follow()
 		elif roll >= 0.4 and roll < 0.55:
@@ -44,7 +47,9 @@ func check_attack():
 			projecttile_volley()
 		else:
 			pass
+		print(state)
 	else:
+		print(state)
 		pass
 
 

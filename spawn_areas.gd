@@ -6,7 +6,10 @@ var drone_path = "res://mobs/navigation_drone.tscn"
 var tank_path = "res://mobs/self-propelled_gun.tscn"
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	var godzila = load(mod_path).instance()
+	get_node("spawner2").add_child(godzila)
+	godzila.add_child(load("res://godzilla.tscn").instance())
+	godzila.global_position = get_node("spawner2").global_position
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
