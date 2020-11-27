@@ -80,10 +80,9 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Timer_to_place_zone" type="Timer" parent="."]
-wait_time = 0.7
+wait_time = 0.5
 
 [node name="follow_timer" type="Timer" parent="."]
-wait_time = 5.0
 
 [node name="Timer_volley" type="Timer" parent="."]
 wait_time = 0.1

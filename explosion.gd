@@ -30,5 +30,5 @@ func _on_Timer_timeout():
 		image = number1
 	get_node("Sprite").texture = image
 	if ticks == 0:
-		pass
-	ticks += 1
+		get_node("Timer").stop()
+	ticks -= 1

@@ -5,11 +5,11 @@ var hp = 2000
 var aggro_range = 1600
 var approach_radius = 350
 var is_active = true
-var fire_distance = 300
+var fire_distance = 450
 var count_of_bull_in_volley
 var state = "free"
 var exploions
-var radius_of_exlosions = 400
+var radius_of_exlosions = 200
 var bullet_path = "res://bullet.tscn"
 var aim
 var move_to = Vector2(0,0)
@@ -17,6 +17,7 @@ var speed =200
 func _ready():
 	get_parent().hp = hp
 	get_parent().aggro_range = aggro_range
+#	get_parent().fire_distance
 	get_parent().approach_radius = approach_radius
 	get_parent().is_active = is_active
 	get_parent().fire_distance = fire_distance
@@ -35,10 +36,11 @@ func check_attack():
 	randomize()
 	if state == "free":
 		var roll = randf()
-		if roll < 0.2:
-			get_node("chill_time").start()
-			state = "chill"
-			get_parent().speed = 0	
+		if roll < 2:
+#			get_node("chill_time").start()
+#			state = "chill"
+#			get_parent().speed = 0	
+			cataclism()
 		elif roll >= 0.2 and roll < 0.4:
 			just_follow()
 		elif roll >= 0.4 and roll < 0.55:
@@ -88,7 +90,7 @@ func _on_chill_time_timeout():
 func cataclism():
 	state = "cataclism"
 	get_node("Timer_to_place_zone").start()
-	exploions = 6
+	exploions = 20
 	pass
 
 func dash_attack():
@@ -98,8 +100,10 @@ func dash_attack():
 	get_node("time_to_dash").start()
 
 func _on_Timer_to_plase_zone_timeout():
-	var where = aim.global_position + Vector2(0,1).rotated(2*PI*randf()) * radius_of_exlosions 
+	var where = aim.global_position + Vector2(0,1).rotated(2*PI*randf()) * radius_of_exlosions * randf() 
+	where = get_parent().nav.get_closest_point(where)
 	var explosion = load("res://explosion.tscn").instance()
+	explosion.global_position = where
 	get_tree().get_root().get_node("Node2D").add_child(explosion)
 	exploions -= 1
 	if exploions <= 0:
