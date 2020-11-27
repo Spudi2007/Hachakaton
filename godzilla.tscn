@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://godzilla.gd" type="Script" id=1]
+
+[node name="godzilla" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="chill_time" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="Timer_volley" type="Timer" parent="."]
+
+[node name="Timer_to_place_zone" type="Timer" parent="."]
+wait_time = 0.7
+
+[node name="follow_timer" type="Timer" parent="."]
+wait_time = 5.0
+[connection signal="timeout" from="chill_time" to="." method="_on_chill_time_timeout"]
+[connection signal="timeout" from="Timer_volley" to="." method="_on_Timer_volley_timeout"]
+[connection signal="timeout" from="Timer_to_place_zone" to="." method="_on_Timer_to_plase_zone_timeout"]
+[connection signal="timeout" from="follow_timer" to="." method="_on_follow_timer_timeout"]
