@@ -28,11 +28,13 @@ func _ready():
 	
 	
 func take_damage(damage):
+	if get_child(2).hp <= 0:
+		return
 	get_child(2).take_damage(damage)
 	if get_child(2).hp <= 0:
 		get_child(2).get_node("CPUParticles2D").emitting = true
 		get_child(2).get_node("CPUParticles2D2").emitting = true
-		death_timer = 1.4
+		death_timer = 1.7
 		
 func attack(aim):
 	pass
@@ -55,8 +57,13 @@ func _process(delta):
 	if death_timer > -1:
 #		death_timer -= delta
 		if death_timer < 0:
+			if self in get_tree().get_nodes_in_group('drones'):
+				var dd = load("res://drone_item.tscn").instance()
+				get_parent().add_child(dd)
+				dd.global_position = self.global_position
 			self.queue_free()
 		death_timer -= delta
+		get_child(2).get_node("Timer").stop()
 		return
 	if check_active(aim.position):
 		

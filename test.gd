@@ -12,6 +12,8 @@ var firing = false
 var weapons
 var bullet_scene = "res://bullet.tscn"
 var viewport
+var have_drone = false
+var hp = 10000
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	weapons = get_node("weapons").get_children()
@@ -32,14 +34,19 @@ func _input(event):
 		firing = true
 	if event.is_action_released("fire_left"):
 		firing = false
-		
+	
+	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	for node in get_tree().get_nodes_in_group('lighted_up'):
 		node.remove_from_group("lighted_up")
-#	print(get_tree().get_nodes_in_group('lighted_up'))
-#	move = Vector2(0,0)
+	if Input.is_action_pressed("right_button") and have_drone:
+		var space_state = get_world_2d().direct_space_state
+		var result = space_state.intersect_ray(self.global_position, self.global_position + weapon_vec.normalized() * 1000)
+		if result:
+			result.collider.add_to_group("lighted_up")
+		
 	magic_vector = Vector2(0,0)
 	get_node("weapons").look_at(weapon_vec + get_child(0).global_position)
 	get_node("legs").look_at(move + get_child(0).global_position)
@@ -68,7 +75,14 @@ func fire(position):
 	get_tree().get_root().get_node('Node2D').add_child(b)
 		
 		
-
+func collect_drone():
+	get_node("Viewport/Spatial/MeshInstance/drone").show()
+	self.have_drone = true
+	pass
+	
+func take_damage(dam):
+	self.hp -= dam
+	
 func _on_Timer_timeout():
 	if firing:
 		fire(weapon_vec)

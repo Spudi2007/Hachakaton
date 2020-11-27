@@ -49,7 +49,7 @@ func fire():
 	var lighted_targets = get_tree().get_nodes_in_group('lighted_up')
 #	var target
 	var result
-	if lighted_targets:
+	if lighted_targets and !(self in lighted_targets):
 		target = find_closest(lighted_targets).global_position
 		var exception = []
 		for enemy in get_tree().get_nodes_in_group('enemies'):
@@ -65,8 +65,11 @@ func fire():
 	if result:
 		if result['collider'].name == 'RigidBody2D':
 			b.to = result['collider'].get_child(0).global_position
+			result['collider'].take_damage(100)
 		else:
 			b.to = result['position']
+			if result['collider'] in get_tree().get_nodes_in_group('enemies'):
+				result['collider'].take_damage(100)
 	else:
 		b.to = target
 #			b.to = target
