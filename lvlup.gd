@@ -72,4 +72,9 @@ func _on_damage_pressed():
 
 
 func _on_TextureButton_pressed():
+	var bullet = load("res://bullet.tscn").instance()
+	bullet.damage += damage_level * 25
+	var hp = get_tree().get_root().get_node("Node2D/walls/RigidBody2D")
+	hp.hp += 2000 * hp_level
+	
 	self.hide()

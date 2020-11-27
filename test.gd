@@ -14,6 +14,7 @@ var bullet_scene = "res://bullet.tscn"
 var viewport
 var have_drone = false
 var hp = 10000
+var speed = 1000
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	weapons = get_node("weapons").get_children()
@@ -55,13 +56,13 @@ func _process(delta):
 	get_node("Sprite").texture = viewport.get_texture()
 	get_node("Viewport/Spatial/MeshInstance2").get_node("AnimationPlayer").playback_speed = move.length() / 100.0
 	if Input.is_action_pressed("move_up"):
-		magic_vector.y -= 300
+		magic_vector.y -= speed
 	if Input.is_action_pressed("move_down"):
-		magic_vector.y += 300
+		magic_vector.y += speed
 	if Input.is_action_pressed("move_left"):
-		magic_vector.x -= 300
+		magic_vector.x -= speed
 	if Input.is_action_pressed("move_right"):
-		magic_vector.x += 300
+		magic_vector.x += speed
 	move = lerp(move, magic_vector, 0.05)
 	self.move_and_slide(move)
 
