@@ -36,11 +36,11 @@ func check_attack():
 	randomize()
 	if state == "free":
 		var roll = randf()
-		if roll < 2:
-#			get_node("chill_time").start()
-#			state = "chill"
-#			get_parent().speed = 0	
-			cataclism()
+		if roll < 0.2:
+			get_node("chill_time").start()
+			state = "chill"
+			get_parent().speed = 0	
+#			cataclism()
 		elif roll >= 0.2 and roll < 0.4:
 			just_follow()
 		elif roll >= 0.4 and roll < 0.55:
@@ -55,11 +55,16 @@ func check_attack():
 	else:
 		print(state)
 		pass
-
-
+func _process(delta):
+	get_node("legs").look_at(move_to + self.global_position)
+	
+	get_node("Viewport/Spatial/MeshInstance").rotation.y = -get_node("legs").global_rotation - PI/2
+	get_node("Sprite").texture = get_node("Viewport").get_texture()
+	
 func projecttile_volley():
 	count_of_bull_in_volley = 100
 	state = "projecttile_volley"
+	get_parent().approach_radius = 150
 	get_node("Timer_volley").start()
 
 func just_follow():
@@ -80,6 +85,7 @@ func _on_Timer_volley_timeout():
 	if count_of_bull_in_volley < 0:
 		get_node("Timer_volley").stop()
 		state = "free"
+		get_parent().approach_radius = approach_radius
 
 
 func _on_chill_time_timeout():

@@ -7,7 +7,7 @@
 [ext_resource path="res://black.png" type="Texture" id=5]
 [ext_resource path="res://red.png" type="Texture" id=6]
 
-[sub_resource type="Curve" id=1]
+[sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.258621, 0.842045 ), 0.0, 0.0, 0, 0, Vector2( 0.741379, 0.669318 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [node name="self-propelled_gun" type="Node2D"]
@@ -63,7 +63,7 @@ gravity = Vector2( 0, 0 )
 initial_velocity = 119.89
 initial_velocity_random = 1.0
 scale_amount = 0.86
-scale_amount_curve = SubResource( 1 )
+scale_amount_curve = SubResource( 2 )
 
 [node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
 self_modulate = Color( 1, 1, 1, 0.180392 )
@@ -76,5 +76,5 @@ gravity = Vector2( 0, 0 )
 initial_velocity = 119.89
 initial_velocity_random = 1.0
 scale_amount = 0.86
-scale_amount_curve = SubResource( 1 )
+scale_amount_curve = SubResource( 2 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
