@@ -38,7 +38,7 @@ func _input(event):
 func _process(delta):
 	for node in get_tree().get_nodes_in_group('lighted_up'):
 		node.remove_from_group("lighted_up")
-	print(get_tree().get_nodes_in_group('lighted_up'))
+#	print(get_tree().get_nodes_in_group('lighted_up'))
 #	move = Vector2(0,0)
 	magic_vector = Vector2(0,0)
 	get_node("weapons").look_at(weapon_vec + get_child(0).global_position)
@@ -46,7 +46,7 @@ func _process(delta):
 	get_node("Viewport/Spatial/MeshInstance2").rotation.y = -get_node("legs").global_rotation - PI/2
 	get_node("Viewport/Spatial/MeshInstance").rotation.y = -get_node("weapons").global_rotation - PI/2
 	get_node("Sprite").texture = viewport.get_texture()
-#	self.move_and_slide(vec.normalized() * 500)
+	get_node("Viewport/Spatial/MeshInstance2").get_node("AnimationPlayer").playback_speed = move.length() / 100.0
 	if Input.is_action_pressed("move_up"):
 		magic_vector.y -= 300
 	if Input.is_action_pressed("move_down"):

@@ -5,7 +5,7 @@ var node_object
 var busy
 var aggro_range = 600
 var aim
-var fire_distance =400
+var fire_distance = 400
 var is_aggressive = false
 var move_radius = 500
 var active_range = 1000
@@ -14,11 +14,13 @@ var time_to_shoot
 var path = [Vector2(134, 221), Vector2(13434, 221)]
 var where_random_move
 var nav 
+var magic_move = Vector2(0,0)
+var move_buff = Vector2(0,0)
 
 func _ready():
 	randomize()
 	nav = get_tree().get_root().get_node('Node2D/Navigation2D')
-	pass
+	aim = get_tree().get_root().get_node("Node2D/walls/RigidBody2D")
 
 func take_damage(damage):
 	get_child(2).take_damage(damage)
@@ -48,7 +50,9 @@ func _process(delta):
 		if check_aggro(aim.position):
 			aggres(delta)
 			busy = "aggro"
-			print("IM ANGRY")
+#			get_child(2).to_target = aim.global_position - self.global_position
+			
+#			print("IM ANGRY")
 		else:
 			if !busy:
 				var roll = randf()
@@ -56,12 +60,12 @@ func _process(delta):
 					get_node("Timer").wait_time = (randf() * 5)
 					busy = "random_wait"
 					get_node("Timer").start()
-					print("I'm wait")
+#					print("I'm wait")
 				else:
 					var where_random_move_loacal = Vector2((randf() * move_radius * 2 - move_radius), (randf() * move_radius * 2 - move_radius)) + global_position
 					where_random_move = nav.get_closest_point(where_random_move_loacal)
 					busy = "random_move"
-					print("I'm moving")
+#					print("I'm moving")
 			if busy == "random_move":
 				move(delta, where_random_move)
 			elif busy == "random_wait":
@@ -77,16 +81,22 @@ var path_buff = Vector2(0,0)
 
 func move(delta, aim):
 	if aim:
-		if path:
+		if aim.distance_to(global_position) < 200:
+			return
+		if path.size() > 0:
 			if (path[-1] - aim).length() >= 100 or true:
 				path = get_tree().get_root().get_node('Node2D/Navigation2D').get_simple_path(self.global_position, aim, true)
-				path_buff = path[-1]
+#				print(path)
+#				path_buff = path[-1]
 			if path.size() > 1:
 	#			path.remove(0)
-	#			print(self.move_and_collide((path[1] - self.global_position).normalized() * delta * 200))
 				if (self.global_position - path[0]).length() < 0.1:
 					path.remove(0)
-				move_and_slide((path[0] - self.global_position).normalized() * 200)
+#				move_and_slide((path[0] - self.global_position).normalized() * 200)
+				magic_move = (path[0] - self.global_position).normalized() * 200
+				move_buff = lerp(move_buff, magic_move, 0.03)
+				get_child(2).move_to = move_buff
+				move_and_slide(move_buff)
 #			else:
 #				move_and_slide((path[1] - self.global_position).normalized() * 200)
 #self.position += (path[1] - self.global_position).normalized() * 1

@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/tank.obj-9da175f74864c567cc3b81a20282cfca.mesh"
+
+[deps]
+
+files=[ "res://.import/tank.obj-9da175f74864c567cc3b81a20282cfca.mesh" ]
+
+source_file="res://mobs/models/tank.obj"
+dest_files=[ "res://.import/tank.obj-9da175f74864c567cc3b81a20282cfca.mesh", "res://.import/tank.obj-9da175f74864c567cc3b81a20282cfca.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

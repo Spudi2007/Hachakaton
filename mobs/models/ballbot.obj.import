@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/ballbot.obj-b25cab257fd68e683c5690533dee9c2c.mesh"
+
+[deps]
+
+files=[ "res://.import/ballbot.obj-b25cab257fd68e683c5690533dee9c2c.mesh" ]
+
+source_file="res://mobs/models/ballbot.obj"
+dest_files=[ "res://.import/ballbot.obj-b25cab257fd68e683c5690533dee9c2c.mesh", "res://.import/ballbot.obj-b25cab257fd68e683c5690533dee9c2c.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
