@@ -1,26 +1,27 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://godzilla.gd" type="Script" id=1]
-[ext_resource path="res://black.png" type="Texture" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://red.png" type="Texture" id=3]
 [ext_resource path="res://mobs/models/GODzilla.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://mobs/models/tank_head.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://black.png" type="Texture" id=6]
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.54902, 0.54902, 0.54902, 1 )
 metallic = 0.41
 roughness = 0.52
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=2]
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="SpatialMaterial" id=6]
+[sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 1, 0, 0, 1 )
 metallic_specular = 0.0
 
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=5]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.258621, 0.842045 ), 0.0, 0.0, 0, 0, Vector2( 0.741379, 0.669318 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [node name="godzilla" type="Node2D"]
@@ -30,6 +31,8 @@ script = ExtResource( 1 )
 wait_time = 3.0
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 64, 64 )
@@ -43,21 +46,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.2581, 0, 0 )
 transform = Transform( -0.885532, 0, 0.464579, 0, 1, 0, -0.464579, 0, -0.885532, -1.90735e-06, -0.311105, -0.0115261 )
 mesh = ExtResource( 4 )
 material/0 = null
-material/1 = SubResource( 5 )
-material/2 = SubResource( 3 )
-material/3 = SubResource( 4 )
-material/4 = SubResource( 5 )
-material/5 = SubResource( 4 )
-material/6 = SubResource( 5 )
-material/7 = SubResource( 5 )
-material/8 = SubResource( 5 )
-material/9 = SubResource( 5 )
-material/10 = SubResource( 5 )
-material/11 = SubResource( 5 )
-material/12 = SubResource( 5 )
-material/13 = SubResource( 5 )
-material/14 = SubResource( 6 )
-material/15 = SubResource( 5 )
+material/1 = SubResource( 1 )
+material/2 = SubResource( 2 )
+material/3 = SubResource( 3 )
+material/4 = SubResource( 1 )
+material/5 = SubResource( 3 )
+material/6 = SubResource( 1 )
+material/7 = SubResource( 1 )
+material/8 = SubResource( 1 )
+material/9 = SubResource( 1 )
+material/10 = SubResource( 1 )
+material/11 = SubResource( 1 )
+material/12 = SubResource( 1 )
+material/13 = SubResource( 1 )
+material/14 = SubResource( 4 )
+material/15 = SubResource( 1 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="Viewport/Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90735e-06, -0.311105, -0.1142 )
@@ -72,6 +75,10 @@ projection = 1
 current = true
 size = 6.41097
 
+[node name="time_to_dash" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [node name="Timer_to_place_zone" type="Timer" parent="."]
 wait_time = 0.7
 
@@ -79,6 +86,7 @@ wait_time = 0.7
 wait_time = 5.0
 
 [node name="Timer_volley" type="Timer" parent="."]
+wait_time = 0.1
 
 [node name="legs" type="Node2D" parent="."]
 
@@ -87,13 +95,13 @@ self_modulate = Color( 1, 1, 1, 0.172549 )
 emitting = false
 amount = 64
 one_shot = true
-texture = ExtResource( 2 )
+texture = ExtResource( 6 )
 spread = 180.0
 gravity = Vector2( 0, 0 )
 initial_velocity = 119.89
 initial_velocity_random = 1.0
 scale_amount = 0.86
-scale_amount_curve = SubResource( 2 )
+scale_amount_curve = SubResource( 5 )
 
 [node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
 self_modulate = Color( 1, 1, 1, 0.180392 )
@@ -106,8 +114,9 @@ gravity = Vector2( 0, 0 )
 initial_velocity = 119.89
 initial_velocity_random = 1.0
 scale_amount = 0.86
-scale_amount_curve = SubResource( 2 )
+scale_amount_curve = SubResource( 5 )
 [connection signal="timeout" from="chill_time" to="." method="_on_chill_time_timeout"]
+[connection signal="timeout" from="time_to_dash" to="." method="_on_time_to_dash_timeout"]
 [connection signal="timeout" from="Timer_to_place_zone" to="." method="_on_Timer_to_plase_zone_timeout"]
 [connection signal="timeout" from="follow_timer" to="." method="_on_follow_timer_timeout"]
 [connection signal="timeout" from="Timer_volley" to="." method="_on_Timer_volley_timeout"]
