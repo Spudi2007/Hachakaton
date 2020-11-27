@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://spawn_areas.gd" type="Script" id=1]
+
+[node name="spawn_areas" type="Node2D" groups=[
+"enemy_drones",
+"enemy_tanks",
+]]
+script = ExtResource( 1 )
+
+[node name="spawner" type="Position2D" parent="."]
+position = Vector2( 5066.34, 5054.69 )
+
+[node name="spawner2" type="Position2D" parent="."]
+position = Vector2( 4496.56, 5513.86 )
+
+[node name="spawner3" type="Position2D" parent="."]
+position = Vector2( 6804.37, 5414.28 )
+
+[node name="spawner4" type="Position2D" parent="."]
+position = Vector2( 4724.72, 4242.6 )
+
+[node name="spawner5" type="Position2D" parent="."]
+position = Vector2( 4754.12, 6669.25 )
+
+[node name="spawner6" type="Position2D" parent="."]
+position = Vector2( 2775.31, 5456.32 )
+
+[node name="spawner7" type="Position2D" parent="."]
+position = Vector2( 3443, 4765.42 )
+
+[node name="spawner8" type="Position2D" parent="."]
+position = Vector2( 3530.79, 6088.65 )
