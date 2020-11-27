@@ -96,7 +96,6 @@ script = ExtResource( 3 )
 [node name="walls" parent="." instance=ExtResource( 5 )]
 
 [node name="RigidBody2D" type="KinematicBody2D" parent="walls"]
-visible = false
 position = Vector2( 3963.08, 4881.63 )
 script = ExtResource( 7 )
 
