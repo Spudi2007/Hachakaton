@@ -18,6 +18,7 @@ var magic_move = Vector2(0,0)
 var move_buff = Vector2(0,0)
 var approach_radius = 200
 
+var death_timer = -1
 
 func _ready():
 	randomize()
@@ -29,8 +30,10 @@ func _ready():
 func take_damage(damage):
 	get_child(2).take_damage(damage)
 	if get_child(2).hp <= 0:
-		self.queue_free()
-
+		get_child(2).get_node("CPUParticles2D").emitting = true
+		get_child(2).get_node("CPUParticles2D2").emitting = true
+		death_timer = 1.4
+		
 func attack(aim):
 	pass
 
@@ -49,12 +52,18 @@ func check_active(aim_pos):
 		return false
 
 func _process(delta):
+	if death_timer > -1:
+#		death_timer -= delta
+		if death_timer < 0:
+			self.queue_free()
+		death_timer -= delta
+		return
 	if check_active(aim.position):
 		
 		if check_aggro(aim.position):
 			aggres(delta)
 			busy = "aggro"
-			if get_parent().name.substr(0,1) == "r":
+			if self in get_tree().get_nodes_in_group('drones'):
 				get_child(2).to_target = aim.global_position - self.global_position
 			
 #			print("IM ANGRY")

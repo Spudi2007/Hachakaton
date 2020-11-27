@@ -20,6 +20,7 @@ func _process(delta):
 		new_drone.global_position = get_child(spawner_counter).global_position
 		print("Spawn drone in ",spawner_counter,"number of drones", get_tree().get_nodes_in_group("enemy_drones").size())
 		new_drone.add_to_group("enemy_drones")
+		new_drone.add_to_group('drones')
 		spawner_counter += 1
 		return
 	if get_tree().get_nodes_in_group("enemy_tanks").size() < 20:

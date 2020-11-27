@@ -13,9 +13,8 @@ func _ready():
 #	get_node("Viewport/Spatial/MeshInstance").rotation.y = randf() * PI
 #	bulet_scene = load("res://mobs/models/projecttile.tscn").instance()
 #	self.add_child(bulet_scene)
-	get_node("Viewport/Spatial").transform.origin.x = 200.0 * get_parent().get_parent().get_index()
-	print(get_parent().get_parent().get_index())
-#get_node("legs").look_at(move_to + self.global_position)
+	get_node("Viewport/Spatial").transform.origin.x = 200.0 * Constants.counter1
+	Constants.counter1 += 1
 #	get_node("Viewport/Spatial/MeshInstance").rotation.y = -get_node("legs").global_rotation - PI/2
 
 	pass

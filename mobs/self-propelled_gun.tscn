@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://mobs/self-propelled_gun.gd" type="Script" id=1]
 [ext_resource path="res://mobs/models/tank.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://mobs/models/tank_head.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://black.png" type="Texture" id=5]
+[ext_resource path="res://red.png" type="Texture" id=6]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.258621, 0.842045 ), 0.0, 0.0, 0, 0, Vector2( 0.741379, 0.669318 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [node name="self-propelled_gun" type="Node2D"]
 script = ExtResource( 1 )
@@ -46,4 +51,30 @@ size = 6.41097
 [node name="legs" type="Node2D" parent="."]
 
 [node name="head" type="Node2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+self_modulate = Color( 1, 1, 1, 0.172549 )
+emitting = false
+amount = 64
+one_shot = true
+texture = ExtResource( 5 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 119.89
+initial_velocity_random = 1.0
+scale_amount = 0.86
+scale_amount_curve = SubResource( 2 )
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+self_modulate = Color( 1, 1, 1, 0.180392 )
+emitting = false
+amount = 64
+one_shot = true
+texture = ExtResource( 6 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 119.89
+initial_velocity_random = 1.0
+scale_amount = 0.86
+scale_amount_curve = SubResource( 2 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

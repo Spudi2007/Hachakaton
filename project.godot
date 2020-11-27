@@ -19,6 +19,10 @@ config/name="Hachakaton"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Constants="*res://constants.gd"
+
 [display]
 
 window/vsync/use_vsync=false

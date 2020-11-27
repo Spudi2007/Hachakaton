@@ -9,12 +9,12 @@ var to_target = Vector2(0,0)
 var move_buff = Vector2(0,0)
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	get_node("Viewport/Spatial").transform.origin.y = 200.0 * get_parent().get_parent().get_index()
+	get_node("Viewport/Spatial").transform.origin.y = 200.0 * Constants.counter2
+	Constants.counter2 += 1
 	get_parent().approach_radius = 100
 
 func take_damage(damage):
 	hp -= damage
-	
 
 func find_target():
 	var space_state = get_world_2d().direct_space_state
