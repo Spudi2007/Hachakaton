@@ -11,11 +11,25 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if get_tree().get_nodes_in_group("enemy_drones").size() < 4:
-		var new_tank = load(mod_path).instance()
-		get_child(spawner_counter).add_child(new_tank)
-		new_tank.add_child(load(drone_path).instance())
-		new_tank.global_position = get_child(spawner_counter).global_position
+	if get_tree().get_nodes_in_group("enemy_drones").size() < 10:
+		if spawner_counter >= 8:
+			spawner_counter = 0
+		var new_drone = load(mod_path).instance()
+		get_child(spawner_counter).add_child(new_drone)
+		new_drone.add_child(load(drone_path).instance())
+		new_drone.global_position = get_child(spawner_counter).global_position
 		print("Spawn drone in ",spawner_counter,"number of drones", get_tree().get_nodes_in_group("enemy_drones").size())
+		new_drone.add_to_group("enemy_drones")
+		spawner_counter += 1
 		return
-	
+	if get_tree().get_nodes_in_group("enemy_tanks").size() < 20:
+		if spawner_counter >= 8:
+			spawner_counter = 0
+		var new_tank = load(mod_path).instance()
+		get_tree().get_root().get_node("Node2D/mob_pos").add_child(new_tank)
+		new_tank.add_child(load(tank_path).instance())
+		new_tank.global_position = get_child(spawner_counter).global_position
+		print("Spawn tank in ",spawner_counter," number of tanks", get_tree().get_nodes_in_group("enemy_tanks").size())
+		new_tank.add_to_group("enemy_tanks")
+		spawner_counter += 1
+		return
