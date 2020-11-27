@@ -23,6 +23,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -259.207
+margin_top = -161.817
+margin_right = 3740.79
+margin_bottom = 3838.18
+color = Color( 0.152941, 0.152941, 0.152941, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -100.983
+margin_top = -63.9865
+margin_right = -14.983
+margin_bottom = -11.9865
+custom_fonts/mono_font = SubResource( 1 )
+text = "number of points: 8"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -39,6 +64,9 @@ rect_scale = Vector2( 0.4, 0.4 )
 rect_clip_content = true
 texture_normal = ExtResource( 3 )
 stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="speed" type="TextureButton" parent="Panel"]
 margin_left = 557.738
@@ -215,21 +243,6 @@ margin_right = 1094.23
 margin_bottom = 135.416
 rect_scale = Vector2( 0.4, 0.4 )
 texture_normal = ExtResource( 10 )
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -88.3784
-margin_top = -54.9729
-margin_right = -2.37842
-margin_bottom = -2.9729
-custom_fonts/mono_font = SubResource( 1 )
-text = "number of points: 8"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 [connection signal="pressed" from="Panel/hp" to="." method="_on_hp_pressed"]
 [connection signal="pressed" from="Panel/speed" to="." method="_on_speed_pressed"]
 [connection signal="pressed" from="Panel/light" to="." method="_on_light_pressed"]

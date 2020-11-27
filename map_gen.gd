@@ -50,7 +50,15 @@ func _ready():
 	packed_scene.pack(get_tree().get_current_scene())
 	ResourceSaver.save("res://my_scene.tscn", packed_scene)
 	pass # Replace with function body.
-
+func _input(event):
+	if event.is_action_pressed("open_lvlup"):
+		get_node("walls/RigidBody2D/Light2D").texture_scale = 40.15
+		var scn = load("res://lvlup.tscn").instance()
+		get_tree().get_root().get_node("Node2D").add_child(scn)
+		scn.show()
+		scn.rect_position = get_tree().get_root().get_node("Node2D/walls/RigidBody2D/Camera2D").global_position - Vector2(520, 300)
+#		for node in get_tree().get_nodes_in_group('enemy'):
+#			node.set_process(false)
 #func clear():
 #	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.

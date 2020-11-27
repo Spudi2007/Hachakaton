@@ -76,5 +76,7 @@ func _on_TextureButton_pressed():
 	bullet.damage += damage_level * 25
 	var hp = get_tree().get_root().get_node("Node2D/walls/RigidBody2D")
 	hp.hp += 2000 * hp_level
-	
-	self.hide()
+	get_tree().get_root().get_node("Node2D/walls/RigidBody2D/Light2D").texture_scale = 4.15 * light_level / 2.0
+	get_tree().get_root().get_node("Node2D/walls/RigidBody2D/Light2D").shadow_enabled = true
+#	get_tree().get_root().get_node("Node2D/walls/RigidBody2D/Light2D").show()
+	self.queue_free()

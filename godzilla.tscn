@@ -8,11 +8,14 @@
 [ext_resource path="res://black.png" type="Texture" id=6]
 
 [sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0, 0.709804, 0.109804, 1 )
+metallic = 0.44
+roughness = 0.71
+
+[sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 0.54902, 0.54902, 0.54902, 1 )
 metallic = 0.41
 roughness = 0.52
-
-[sub_resource type="SpatialMaterial" id=2]
 
 [sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0, 0, 0, 1 )
@@ -45,22 +48,22 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.2581, 0, 0 )
 [node name="MeshInstance" type="MeshInstance" parent="Viewport/Spatial"]
 transform = Transform( -0.885532, 0, 0.464579, 0, 1, 0, -0.464579, 0, -0.885532, -1.90735e-06, -0.311105, -0.0115261 )
 mesh = ExtResource( 4 )
-material/0 = null
-material/1 = SubResource( 1 )
-material/2 = SubResource( 2 )
+material/0 = SubResource( 1 )
+material/1 = SubResource( 2 )
+material/2 = SubResource( 1 )
 material/3 = SubResource( 3 )
-material/4 = SubResource( 1 )
+material/4 = SubResource( 2 )
 material/5 = SubResource( 3 )
-material/6 = SubResource( 1 )
-material/7 = SubResource( 1 )
-material/8 = SubResource( 1 )
-material/9 = SubResource( 1 )
-material/10 = SubResource( 1 )
-material/11 = SubResource( 1 )
-material/12 = SubResource( 1 )
-material/13 = SubResource( 1 )
+material/6 = SubResource( 2 )
+material/7 = SubResource( 2 )
+material/8 = SubResource( 2 )
+material/9 = SubResource( 2 )
+material/10 = SubResource( 2 )
+material/11 = SubResource( 2 )
+material/12 = SubResource( 2 )
+material/13 = SubResource( 2 )
 material/14 = SubResource( 4 )
-material/15 = SubResource( 1 )
+material/15 = SubResource( 2 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="Viewport/Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90735e-06, -0.311105, -0.1142 )
