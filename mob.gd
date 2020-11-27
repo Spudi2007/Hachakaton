@@ -16,12 +16,16 @@ var where_random_move
 var nav 
 var magic_move = Vector2(0,0)
 var move_buff = Vector2(0,0)
+var approach_radius = 200
+
 
 func _ready():
 	randomize()
 	nav = get_tree().get_root().get_node('Node2D/Navigation2D')
 	aim = get_tree().get_root().get_node("Node2D/walls/RigidBody2D")
-
+	
+	
+	
 func take_damage(damage):
 	get_child(2).take_damage(damage)
 	if get_child(2).hp <= 0:
@@ -50,7 +54,8 @@ func _process(delta):
 		if check_aggro(aim.position):
 			aggres(delta)
 			busy = "aggro"
-#			get_child(2).to_target = aim.global_position - self.global_position
+			if get_parent().name.substr(0,1) == "r":
+				get_child(2).to_target = aim.global_position - self.global_position
 			
 #			print("IM ANGRY")
 		else:
@@ -81,7 +86,7 @@ var path_buff = Vector2(0,0)
 
 func move(delta, aim):
 	if aim:
-		if aim.distance_to(global_position) < 200:
+		if aim.distance_to(global_position) < approach_radius:
 			return
 		if path.size() > 0:
 			if (path[-1] - aim).length() >= 100 or true:

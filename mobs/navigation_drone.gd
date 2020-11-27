@@ -6,9 +6,11 @@ var damage = 15
 var weapon
 var move_to = Vector2(0,0)
 var to_target = Vector2(0,0)
+var move_buff = Vector2(0,0)
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	get_node("Viewport/Spatial").transform.origin.y = 200.0 * get_parent().get_parent().get_index()
+	get_parent().approach_radius = 100
 
 func take_damage(damage):
 	hp -= damage
@@ -23,6 +25,10 @@ func find_target():
 			result.collider.add_to_group("lighted_up")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-#	return
+	get_node("Sprite").texture = get_node('Viewport').get_texture()
+	get_node("head").look_at(to_target + self.global_position)
+	
+	get_node("Viewport/Spatial/MeshInstance").rotation.y = -get_node("head").global_rotation - PI/2
+
 	if get_parent().is_aggressive:
 		find_target()
